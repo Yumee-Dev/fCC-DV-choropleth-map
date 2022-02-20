@@ -75,10 +75,12 @@ const getData = (source) => {
                 (county) => county.fips === d.id
             )[0];
             const tooltip = d3.select("#tooltip");
+            const xOffset = document.getElementById("canvas").getBoundingClientRect().left;
+            const yOffset = document.getElementById("canvas").getBoundingClientRect().top;            
             tooltip
                 .style("display", "block")
-                .style("left", event.layerX + 20 + "px")
-                .style("top", event.layerY - 20 + "px")
+                .style("left", event.clientX - xOffset + 20 + "px")
+                .style("top", event.clientY - yOffset - 20 + "px")
                 .html(
                     `${educationsElement.area_name}, ${educationsElement.state
                     }: ${Math.round(educationsElement.bachelorsOrHigher)}%`
